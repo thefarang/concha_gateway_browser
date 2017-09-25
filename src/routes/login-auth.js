@@ -18,7 +18,7 @@ router.post('/', (req, res, next) => {
     // Send email and password to the user service to authenticate and return
     // the user details.
     options = {
-      url: `http://concha_user:3001/api/v1/users/${email}/${password}`, // @todo config this
+      url: `http://concha_user/api/v1/users/${email}/${password}`, // @todo config this
       headers: {
         'Accept': 'application/json'
       }
@@ -46,7 +46,7 @@ router.post('/', (req, res, next) => {
       // @todo
       // Duplicated in app.js. Extract this to a central location.
       options = {
-        url: `http://concha_auth:3002/api/v1/access-control/${user.role}`, // @todo config this
+        url: `http://concha_auth/api/v1/access-control/${user.role}`, // @todo config this
         headers: {
           'Accept': 'application/json'
         }

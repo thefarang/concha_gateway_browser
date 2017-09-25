@@ -72,7 +72,7 @@ app.use((req, res, next) => {
         // @todo
         // This is a copy of what happens in login-auth.js, so share this code somewhere.
         const options = {
-          url: `http://concha_auth:3002/api/v1/access-control/${req.user.role}`, // @todo config this
+          url: `http://concha_auth/api/v1/access-control/${req.user.role}`, // @todo config this
           headers: {
             'Accept': 'application/json'
           }
