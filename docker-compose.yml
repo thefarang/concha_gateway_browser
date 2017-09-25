@@ -1,0 +1,9 @@
+version: "3"
+services:
+
+  concha_gateway_browser:
+    build: .
+    volumes:
+      - ./src:/app/src
+    ports:
+      - 3000:80

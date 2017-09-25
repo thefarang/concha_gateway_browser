@@ -4,7 +4,6 @@ const express = require('express');
 const request = require('request');
 const path = require('path');
 const favicon = require('serve-favicon');
-const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const bearerToken = require('bearer-token');
@@ -18,7 +17,6 @@ app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -74,7 +72,7 @@ app.use((req, res, next) => {
         // @todo
         // This is a copy of what happens in login-auth.js, so share this code somewhere.
         const options = {
-          url: `http://localhost:3002/api/v1/access-control/${req.user.role}`, // @todo config this
+          url: `http://concha_auth:3002/api/v1/access-control/${req.user.role}`, // @todo config this
           headers: {
             'Accept': 'application/json'
           }
