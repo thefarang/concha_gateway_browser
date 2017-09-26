@@ -1,12 +1,11 @@
-'use strict';
+'use strict'
 
-const express = require('express');
-const router = express.Router();
+const express = require('express')
+const router = express.Router()
 
 // GET login page
 router.get('/', (req, res, next) => {
-  res.render('login', { title: 'Login page' });
-  return;
-});
+  res.render('login', { title: 'Login page' })
+})
 
-module.exports = router;
+module.exports = router

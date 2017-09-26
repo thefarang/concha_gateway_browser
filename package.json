@@ -3,7 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "debug": "./node_modules/.bin/nodemon ./bin/www"
+    "lint": "./node_modules/.bin/standard \"src/**/*.js\"",
+    "fix-style": "./node_modules/.bin/standard --fix \"src/**/*.js\"",
+    "debug": "./node_modules/.bin/nodemon ./bin/www",
+    "test": "npm lint && exit 0"
   },
   "dependencies": {
     "bearer-token": "2.0.1",
@@ -17,6 +20,7 @@
     "serve-favicon": "2.4.2"
   },
   "devDependencies": {
+    "standard": "*",
     "nodemon": "^1.12.1"
   }
 }
