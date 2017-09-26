@@ -22,6 +22,16 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
+
+/*
+const api = new RESTAPI()
+api.setUrl(`http://concha_user/api/v1/users/${email}/${password}`)
+api.setHeader('Accept', 'application/json')
+const [err, res, user] = api.request()
+*/
+
+
+
 // @todo
 // Include validation middleware on all incoming user data
 
@@ -29,6 +39,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 // a Guest object and store to req.user. Then check if the requested
 // route is authorised for this user.
 app.use((req, res, next) => {
+  /*
   bearerToken(req, (err, token) => {
     if (err) {
       res.status(500)
@@ -119,20 +130,24 @@ app.use((req, res, next) => {
       res.send()
     })
   })
+  */
+  next()
 })
 
 const index = require('./routes/index')
-const login = require('./routes/login')
-const loginAuth = require('./routes/login-auth')
-const dashboard = require('./routes/dashboard')
-const register = require('./routes/register')
-// const registerSubmit = require('./routes/register-submit');
+// const login = require('./routes/login')
+// const loginAuth = require('./routes/login-auth')
+// const dashboard = require('./routes/dashboard')
+// const register = require('./routes/register')
+// ## const registerSubmit = require('./routes/register-submit');
 
 app.use('/', index)
+/*
 app.use('/login', login)
 app.use('/login-auth', loginAuth)
 app.use('/dashboard', dashboard)
 app.use('/register', register)
+*/
 // app.use('/logout', logout); // @reminder - this is not needed with tokens, the client can simply delete the token
 
 // Catch 404 and forward to error handler
