@@ -6,7 +6,7 @@
     "lint": "./node_modules/.bin/standard \"src/**/*.js\"",
     "fix-style": "./node_modules/.bin/standard --fix \"src/**/*.js\"",
     "debug": "./node_modules/.bin/nodemon ./bin/www",
-    "test": "npm lint && exit 0"
+    "test": "npm run lint && exit 0"
   },
   "dependencies": {
     "bearer-token": "2.0.1",

@@ -1,4 +1,4 @@
-FROM node:boron-alpine
+FROM node:8.5.0-alpine
 
 MAINTAINER thefarang
 
