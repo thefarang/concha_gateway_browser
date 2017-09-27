@@ -1,19 +1,15 @@
 FROM node:8.5.0-alpine
 
-RUN mkdir /app
+RUN mkdir -p /app/bin /app/src /app/test
 WORKDIR /app
 
-COPY package.json /app
-COPY npm-shrinkwrap.json /app
-RUN npm install
+COPY package.json npm-shrinkwrap.json /app/
+RUN npm install --silent
 
-RUN mkdir /app/bin
+RUN npm cache clean --force --silent
+
 COPY ./bin/www /app/bin/www
-
-RUN mkdir /app/src
 COPY ./src /app/src
-
-RUN mkdir /app/test
 COPY ./test /app/test
 
 EXPOSE 80
