@@ -1,7 +1,9 @@
 node_modules/
 .vscode/
 .git/
-Dockerfile
 .gitignore
+.travis.yml
+docker-compose.json
+Dockerfile
 README.md
 npm-debug.log

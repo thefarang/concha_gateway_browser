@@ -1,13 +1,13 @@
 'use strict'
 
 const express = require('express')
-const request = require('request')
+// const request = require('request')
 const path = require('path')
 // const favicon = require('serve-favicon');
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
-const bearerToken = require('bearer-token')
-const jwt = require('jsonwebtoken')
+// const bearerToken = require('bearer-token')
+// const jwt = require('jsonwebtoken')
 
 const app = express()
 
@@ -22,15 +22,12 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
-
 /*
 const api = new RESTAPI()
 api.setUrl(`http://concha_user/api/v1/users/${email}/${password}`)
 api.setHeader('Accept', 'application/json')
 const [err, res, user] = api.request()
 */
-
-
 
 // @todo
 // Include validation middleware on all incoming user data
@@ -170,6 +167,7 @@ app.use((err, req, res, next) => {
 
 // @todo
 // Extract this to an appropriate file.
+/*
 function isAuthorised (resource, permission, acl) {
   let isAuthorised = false
   for (const index in acl) {
@@ -180,5 +178,6 @@ function isAuthorised (resource, permission, acl) {
   }
   return isAuthorised
 }
+*/
 
 module.exports = app

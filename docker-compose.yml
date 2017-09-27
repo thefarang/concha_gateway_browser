@@ -2,6 +2,7 @@ version: "3"
 services:
 
   concha_gateway_browser:
+    container_name: concha_gateway_browser
     build: .
     volumes:
       # Make the following directories available to docker so that changes made on the host
@@ -19,4 +20,5 @@ services:
       - ./npm-shrinkwrap.json:/app/npm-shrinkwrap.json
     command: npm run debug
     ports:
+      # Expose port to host machine for debugging
       - 80:80
