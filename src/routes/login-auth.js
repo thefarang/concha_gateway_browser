@@ -24,7 +24,10 @@ router.post('/', (req, res, next) => {
 
     request(options, (err, apiResponse, user) => {
       if (err) {
-        return reject(500, null)
+        const err = new Error()
+        err.statusCode = 500
+        err.message = null
+        return reject(err)
       }
 
       if (apiResponse.statusCode !== 200) {
@@ -51,12 +54,18 @@ router.post('/', (req, res, next) => {
       request(options, (err, apiResponse, acl) => {
         if (err) {
           // @todo - logging
-          return reject(500, null)
+          const err = new Error()
+          err.statusCode = 500
+          err.message = null
+          return reject(err)
         }
 
         if (apiResponse.statusCode !== 200) {
           // Not authenticated.
-          return reject(apiResponse.statusCode, JSON.parse(apiResponse.body))
+          const err = new Error()
+          err.statusCode = apiResponse.statusCode
+          err.message = apiResponse.body
+          return reject(err)
         }
 
         // Parse the user string so we can work with it as a JSON object.
@@ -83,7 +92,10 @@ router.post('/', (req, res, next) => {
         (jwtError, token) => {
           if (jwtError) {
             // @todo - add logging
-            return reject(500, null)
+            const err = new Error()
+            err.statusCode = 500
+            err.message = null
+            return reject(err)
           }
 
           // Authenticated
@@ -96,9 +108,9 @@ router.post('/', (req, res, next) => {
     res.status(200)
     res.json({ token: token })
   })
-  .catch((statusCode, body) => {
-    res.status(statusCode)
-    res.json({ message: body })
+  .catch((err) => {
+    res.status(err.statusCode)
+    res.json({ message: err.message })
   })
 })
 
