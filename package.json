@@ -6,7 +6,7 @@
     "lint": "./node_modules/.bin/standard \"src/**/*.js\"",
     "fix-style": "./node_modules/.bin/standard --fix \"src/**/*.js\"",
     "debug": "./node_modules/.bin/nodemon ./bin/www",
-    "test": "npm run lint && exit 0"
+    "test": "./node_modules/.bin/mocha"
   },
   "dependencies": {
     "bearer-token": "2.0.1",
@@ -20,7 +20,10 @@
     "serve-favicon": "2.4.2"
   },
   "devDependencies": {
-    "standard": "*",
-    "nodemon": "^1.12.1"
+    "standard": "10.0.3",
+    "nodemon": "1.12.1",
+    "mocha": "3.5.3",
+    "chai": "4.1.2",
+    "chai-http": "3.0.0"
   }
 }
