@@ -1,5 +1,36 @@
 version: "3"
+
+volumes:
+  mongodata:
+
 services:
+
+  mongo:
+    container_name: mongo
+    image: mongo:3.0.15-wheezy
+    ports:
+      # Expose ports without publishing them to the host machine
+      - 27017
+    volumes:
+      - mongodata:/data/db
+
+  concha_auth:
+    container_name: concha_auth
+    image: concha_auth
+    command: npm run debug
+    links:
+      - mongo
+    ports:
+      - 3002:80
+
+  concha_user:
+    container_name: concha_user
+    image: concha_user
+    command: npm run debug
+    links:
+      - mongo
+    ports:
+      - 3001:80
 
   concha_gateway_browser:
     container_name: concha_gateway_browser
@@ -19,6 +50,9 @@ services:
       # github.
       - ./npm-shrinkwrap.json:/app/npm-shrinkwrap.json
     command: npm run debug
+    links:
+      - concha_user
+      - concha_auth
     ports:
       # Expose port to host machine for debugging
       - 80:80
