@@ -1,5 +1,36 @@
 version: "3"
+
+volumes:
+  mongodata:
+
 services:
+
+  mongo:
+    container_name: mongo
+    image: mvertes/alpine-mongo:3.4.9-0
+    ports:
+      # Expose ports without publishing them to the host machine
+      - 27017
+    volumes:
+      - mongodata:/data/db
+
+  concha_auth:
+    container_name: concha_auth
+    image: thefarang/concha_auth:master
+    command: npm run debug
+    links:
+      - mongo
+    ports:
+      - 3002:80
+
+  concha_user:
+    container_name: concha_user
+    image: thefarang/concha_user:master
+    command: npm run debug
+    links:
+      - mongo
+    ports:
+      - 3001:80
 
   concha_gateway_browser:
     container_name: concha_gateway_browser
@@ -8,17 +39,14 @@ services:
       # Make the following directories available to docker so that changes made on the host
       # are immediately available inside the docker container.
       - ./src:/app/src
-      - ./test:/app/test
-
-      # Make package.json available to Docker so that new packages added during the test/develop
-      # lifecycle are reflected back to the host, where they can be commited to github.
       - ./package.json:/app/package.json
-
-      # Make npm-shrinkwrap.json available to Docker so that changes made by npm shrinkwrap 
-      # in the docker container are reflected back to the host, where they can be committed to
-      # github.
       - ./npm-shrinkwrap.json:/app/npm-shrinkwrap.json
+    environment:
+      - NODE_CONFIG_DIR=/app/src/config
     command: npm run debug
+    links:
+      - concha_user
+      - concha_auth
     ports:
       # Expose port to host machine for debugging
       - 80:80

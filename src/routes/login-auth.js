@@ -1,8 +1,10 @@
 'use strict'
 
+const config = require('config')
 const request = require('request')
 const express = require('express')
 const jwt = require('jsonwebtoken')
+
 const router = express.Router()
 
 router.post('/', (req, res, next) => {
@@ -16,7 +18,7 @@ router.post('/', (req, res, next) => {
     // Send email and password to the user service to authenticate and return
     // the user details.
     options = {
-      url: `http://concha_user/api/v1/users/${email}/${password}`, // @todo config this
+      url: `${config.get('conchaUserApi')}/users/member/${email}/${password}`,
       headers: {
         'Accept': 'application/json'
       }
@@ -25,7 +27,7 @@ router.post('/', (req, res, next) => {
     request(options, (err, apiResponse, user) => {
       if (err) {
         const err = new Error()
-        err.statusCode = 500
+        err.status = 500
         err.message = null
         return reject(err)
       }
@@ -40,12 +42,14 @@ router.post('/', (req, res, next) => {
     })
   })
   .then((user) => {
+    // @todo
+    // Refactor to use the shared library
     // Retrieve and attach the user's acl
     return new Promise((resolve, reject) => {
       // @todo
       // Duplicated in app.js. Extract this to a central location.
       options = {
-        url: `http://concha_auth/api/v1/access-control/${user.role}`, // @todo config this
+        url: `${config.get('conchaAuthApi')}/access-control/${user.role}`,
         headers: {
           'Accept': 'application/json'
         }
@@ -55,7 +59,7 @@ router.post('/', (req, res, next) => {
         if (err) {
           // @todo - logging
           const err = new Error()
-          err.statusCode = 500
+          err.status = 500
           err.message = null
           return reject(err)
         }
@@ -63,7 +67,7 @@ router.post('/', (req, res, next) => {
         if (apiResponse.statusCode !== 200) {
           // Not authenticated.
           const err = new Error()
-          err.statusCode = apiResponse.statusCode
+          err.status = apiResponse.statusCode
           err.message = apiResponse.body
           return reject(err)
         }
@@ -109,7 +113,7 @@ router.post('/', (req, res, next) => {
     res.json({ token: token })
   })
   .catch((err) => {
-    res.status(err.statusCode)
+    res.status(err.status)
     res.json({ message: err.message })
   })
 })
