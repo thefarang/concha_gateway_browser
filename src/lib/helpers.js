@@ -5,8 +5,8 @@ const request = require('request')
 const bearerToken = require('bearer-token')
 const jwt = require('jsonwebtoken')
 
-async function getGuestUser() {
-  return await new Promise((resolve, reject) => {
+async function getGuestUser () {
+  return new Promise((resolve, reject) => {
     const options = {
       url: `${config.get('conchaUserApi')}/users/guest`,
       headers: {
@@ -33,8 +33,8 @@ async function getGuestUser() {
   })
 }
 
-async function getToken(req) {
-  return await new Promise((resolve, reject) => {
+async function getToken (req) {
+  return new Promise((resolve, reject) => {
     bearerToken(req, (err, token) => {
       if (err) {
         // @todo Error 500
@@ -46,22 +46,22 @@ async function getToken(req) {
   })
 }
 
-async function getUserByToken(token) {
-  return await new Promise((resolve, reject) => {
+async function getUserByToken (token) {
+  return new Promise((resolve, reject) => {
     // @todo - Parameterise
     jwt.verify(token, 'secret', (err, decodedUser) => {
-        if (err) {
+      if (err) {
           // @todo 403
-          return reject(err)
-        }
-        return resolve(decodedUser)
-      })
+        return reject(err)
+      }
+      return resolve(decodedUser)
+    })
   })
 }
 
 // Returns User as a JSON object
-async function getUserACLByRole(role) {
-  return await new Promise((resolve, reject) => {
+async function getUserACLByRole (role) {
+  return new Promise((resolve, reject) => {
     const options = {
       url: `${config.get('conchaAuthApi')}/access-control/${role}`,
       headers: {

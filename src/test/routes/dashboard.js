@@ -7,12 +7,14 @@ const app = require('../../app')
 
 chai.use(chaiHttp)
 
+/* eslint-disable no-unused-expressions */
+/* eslint-disable handle-callback-err */
 describe('desc', () => {
   beforeEach((done) => {
     done()
   })
 
-  it ('desc', (done) => {
+  it('desc', (done) => {
     chai
       .request(app)
       // http://chaijs.com/plugins/chai-http/
@@ -30,3 +32,5 @@ describe('desc', () => {
       })
   })
 })
+/* eslint-enable handle-callback-err */
+/* eslint-enable no-unused-expressions */

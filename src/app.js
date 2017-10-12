@@ -27,7 +27,6 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use(async (req, res, next) => {
-
   try {
     const token = await helpers.getToken(req)
     if (token) {
