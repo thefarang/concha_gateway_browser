@@ -1,5 +1,6 @@
 'use strict'
 
+const config = require('config')
 const request = require('request')
 const bearerToken = require('bearer-token')
 const jwt = require('jsonwebtoken')
@@ -7,7 +8,7 @@ const jwt = require('jsonwebtoken')
 async function getGuestUser() {
   return await new Promise((resolve, reject) => {
     const options = {
-      url: `http://concha_user/api/v1/users/guest`, // @todo config this
+      url: `${config.get('conchaUserApi')}/users/guest`,
       headers: {
         'Accept': 'application/json'
       }
@@ -62,7 +63,7 @@ async function getUserByToken(token) {
 async function getUserACLByRole(role) {
   return await new Promise((resolve, reject) => {
     const options = {
-      url: `http://concha_auth/api/v1/access-control/${role}`, // @todo config this
+      url: `${config.get('conchaAuthApi')}/access-control/${role}`,
       headers: {
         'Accept': 'application/json'
       }

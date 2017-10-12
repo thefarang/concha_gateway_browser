@@ -5,8 +5,8 @@
   "scripts": {
     "lint": "./node_modules/.bin/standard \"src/**/*.js\"",
     "fix-style": "./node_modules/.bin/standard --fix \"src/**/*.js\"",
-    "debug": "./node_modules/.bin/nodemon ./bin/www",
-    "test": "./node_modules/.bin/mocha"
+    "debug": "./node_modules/.bin/nodemon ./src/bin/startup.js",
+    "test": "./node_modules/.bin/mocha --timeout 10000 \"src/test/routes/*.js\""
   },
   "dependencies": {
     "bearer-token": "2.0.1",
@@ -17,13 +17,26 @@
     "express": "4.15.2",
     "jsonwebtoken": "8.0.1",
     "request": "2.82.0",
-    "serve-favicon": "2.4.2"
+    "serve-favicon": "2.4.2",
+    "config": "1.26.2"
   },
   "devDependencies": {
     "standard": "10.0.3",
     "nodemon": "1.12.1",
     "mocha": "3.5.3",
     "chai": "4.1.2",
-    "chai-http": "3.0.0"
+    "chai-http": "3.0.0",
+    "istanbul": "v1.1.0-alpha.1",
+    "coveralls": "3.0.0"
+  },
+  "standard": {
+    "globals": [
+      "describe",
+      "before",
+      "beforeEach",
+      "after",
+      "afterEach",
+      "it"
+    ]
   }
 }

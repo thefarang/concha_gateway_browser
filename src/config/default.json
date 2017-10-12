@@ -1,0 +1,4 @@
+{
+  "conchaUserApi": "http://concha_user/api/v1",
+  "conchaAuthApi": "http://concha_auth/api/v1"
+}

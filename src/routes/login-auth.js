@@ -1,5 +1,6 @@
 'use strict'
 
+const config = require('config')
 const request = require('request')
 const express = require('express')
 const jwt = require('jsonwebtoken')
@@ -17,7 +18,7 @@ router.post('/', (req, res, next) => {
     // Send email and password to the user service to authenticate and return
     // the user details.
     options = {
-      url: `http://concha_user/api/v1/users/member/${email}/${password}`, // @todo config this
+      url: `${config.get('conchaUserApi')}/users/member/${email}/${password}`,
       headers: {
         'Accept': 'application/json'
       }
@@ -48,7 +49,7 @@ router.post('/', (req, res, next) => {
       // @todo
       // Duplicated in app.js. Extract this to a central location.
       options = {
-        url: `http://concha_auth/api/v1/access-control/${user.role}`, // @todo config this
+        url: `${config.get('conchaAuthApi')}/access-control/${user.role}`,
         headers: {
           'Accept': 'application/json'
         }
