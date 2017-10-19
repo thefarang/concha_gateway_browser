@@ -17,6 +17,8 @@ services:
   concha_auth:
     container_name: concha_auth
     image: thefarang/concha_auth:master
+    environment:
+      - NODE_CONFIG_DIR=/app/src/config
     command: npm run debug
     links:
       - mongo
@@ -26,6 +28,8 @@ services:
   concha_user:
     container_name: concha_user
     image: thefarang/concha_user:master
+    environment:
+      - NODE_CONFIG_DIR=/app/src/config
     command: npm run debug
     links:
       - mongo

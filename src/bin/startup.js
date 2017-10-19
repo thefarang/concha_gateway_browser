@@ -1,5 +1,6 @@
 'use strict'
 
+const log = require('../lib/log')
 const app = require('../app')
 const http = require('http')
 
@@ -37,10 +38,10 @@ const onError = (error) => {
   // handle specific listen errors with friendly messages
   switch (error.code) {
     case 'EACCES':
-      console.error(bind + ' requires elevated privileges')
+      log.info({}, bind + ' requires elevated privileges')
       process.exit(1)
     case 'EADDRINUSE':
-      console.error(bind + ' is already in use')
+      log.info({}, bind + ' is already in use')
       process.exit(1)
     default:
       throw error

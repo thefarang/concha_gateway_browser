@@ -1,5 +1,5 @@
 {
-  "name": "concha-gateway-browser",
+  "name": "concha_gateway_browser",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -18,7 +18,8 @@
     "jsonwebtoken": "8.0.1",
     "request": "2.82.0",
     "serve-favicon": "2.4.2",
-    "config": "1.26.2"
+    "config": "1.26.2",
+    "bunyan": "1.8.12"
   },
   "devDependencies": {
     "standard": "10.0.3",
